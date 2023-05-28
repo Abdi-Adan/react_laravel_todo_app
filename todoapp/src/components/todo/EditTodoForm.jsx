@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 
 
 export default function EditTodoForm({ editTodo, task }) {
-  const [value, setValue] = useState(task.task);
+  const [value, setValue] = useState(task['title']);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    editTodo(value, task.id);
+    editTodo(value, task['id']);
   };
 
   return (

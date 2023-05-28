@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UserController;
-use App\Http\Controllers\Api\TodoItemController;
+use App\Http\Controllers\ItemController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,16 +17,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Protected Routes
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
     Route::apiResource('/users', UserController::class);
-    Route::post('/todo', [TodoItemController::class, 'store'])->middleware('auth');
-    // Route::post('/todo', [TodoItemController::class, 'store']);
-    // Route::apiResource('/todo', 'TodoItemController');
 });
+Route::middleware('auth:sanctum')->post('/todo', [ItemController::class, 'index']);
 
+// Authentication Routes
 Route::post('/signup', [AuthController::class, 'signup']);
 Route::post('/login', [AuthController::class, 'login']);
+
+// Todo Routes
+Route::get('/todo', [ItemController::class, 'index']);
+Route::prefix('/todo')->group(function () {
+    Route::post('/add', [ItemController::class, 'store']);
+    Route::put('/{id}', [ItemController::class, 'update']);
+    Route::delete('/{id}', [ItemController::class, 'destroy']);
+});
