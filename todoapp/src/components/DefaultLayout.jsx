@@ -2,6 +2,8 @@ import { Link, Navigate, Outlet } from "react-router-dom";
 import { useStateContext } from "../context/ContextProvider";
 import axiosClient from "../axios-client.js";
 import { useEffect } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUser } from '@fortawesome/free-solid-svg-icons'
 
 export default function DefaultLayout() {
     const { user, token, setUser, setToken } = useStateContext();
@@ -36,13 +38,16 @@ export default function DefaultLayout() {
             <div className="content">
                 <header>
                     <div>
-                        Header
+                        Effortlessly Manage Your Tasks.
                     </div>
 
 
                     <div>
-                        {user.name} &nbsp; &nbsp;
-                        <a onClick={onLogout} className="btn-logout" href="#">Logout</a>
+                        <a className="outlineButton">
+                            <FontAwesomeIcon className="profileIcon" icon={faUser} />
+                            {user.name} &nbsp; &nbsp;
+                        </a>
+                        <a onClick={onLogout} className="btnLogout" href="#">Logout</a>
                     </div>
                 </header>
                 <main>

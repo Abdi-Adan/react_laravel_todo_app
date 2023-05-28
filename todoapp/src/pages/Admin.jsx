@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import axiosClient from "../axios-client.js";
-import { Link } from "react-router-dom";
-import { useStateContext } from "../context/ContextProvider.jsx";
 
 export default function Users() {
     const [users, setUsers] = useState([]);

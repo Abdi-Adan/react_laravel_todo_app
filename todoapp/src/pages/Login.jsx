@@ -17,6 +17,7 @@ export default function Login() {
             email: emailRef.current.value,
             password: passwordRef.current.value,
         }
+
         axiosClient.post('/login', payload)
             .then(({ data }) => {
                 setUser(data.user)
@@ -31,7 +32,7 @@ export default function Login() {
     }
 
     return (
-        <div className="login-signup-form animated fadeInDown">
+        <div className="loginSignupForm animated fadeInDown">
             <div className="form">
                 <form onSubmit={onSubmit}>
                     <h1 className="title">Login into your account</h1>
@@ -43,7 +44,7 @@ export default function Login() {
 
                     <input ref={emailRef} type="email" placeholder="Email" />
                     <input ref={passwordRef} type="password" placeholder="Password" />
-                    <button className="btn btn-block">Login</button>
+                    <button className="btn btnBlock">Login</button>
                     <p className="message">Not registered? <Link to="/signup">Create an account</Link></p>
 
                 </form>

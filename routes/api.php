@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\TodoItemController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,9 @@ Route::middleware('auth:sanctum')->group(function () {
         return $request->user();
     });
     Route::apiResource('/users', UserController::class);
+    Route::post('/todo', [TodoItemController::class, 'store'])->middleware('auth');
+    // Route::post('/todo', [TodoItemController::class, 'store']);
+    // Route::apiResource('/todo', 'TodoItemController');
 });
 
 Route::post('/signup', [AuthController::class, 'signup']);

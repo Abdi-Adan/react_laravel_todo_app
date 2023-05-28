@@ -1,7 +1,9 @@
+import TodoWrapper from "../components/todo/TodoWrapper";
+
 export default function Todo(){
     return (
         <div>
-            Todo
+            <TodoWrapper />
         </div>
     )
 }
