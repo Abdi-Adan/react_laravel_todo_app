@@ -36,5 +36,6 @@ Route::get('/todo', [ItemController::class, 'index']);
 Route::prefix('/todo')->group(function () {
     Route::post('/add', [ItemController::class, 'store']);
     Route::put('/{id}', [ItemController::class, 'update']);
+    Route::put('/edit/{id}', [ItemController::class, 'edit']);
     Route::delete('/{id}', [ItemController::class, 'destroy']);
 });

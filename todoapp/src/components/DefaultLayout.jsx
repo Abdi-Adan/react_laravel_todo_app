@@ -31,13 +31,13 @@ export default function DefaultLayout() {
 
     return (
         <div id="defaultLayout">
-            <aside>
+            <aside className="sidebar">
                 <Link to="/admin">Admin</Link>
-                <Link to="/todo">Todo Items</Link>
+                <Link to="/todo">Todos</Link>
             </aside>
             <div className="content">
                 <header>
-                    <div>
+                    <div className="headerTitle">
                         Effortlessly Manage Your Tasks.
                     </div>
 

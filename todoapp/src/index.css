@@ -231,6 +231,10 @@ table>tbody>tr>td {
     padding: 2rem;
 }
 
+.headerTitle {
+    font-weight: bold;
+}
+
 .animated {
     -webkit-animation-duration: 0.3s;
     animation-duration: 0.3s;
@@ -269,6 +273,7 @@ table>tbody>tr>td {
     background: #10277C;
     padding: 2rem;
     border-radius: 5px;
+    min-height: 80vh;
 }
 
 .TodoForm {
@@ -319,7 +324,12 @@ table>tbody>tr>td {
     width: 96%;
 }
 
-.iconPadding{
+.iconPadding {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.actionIconPadding {
     margin-right: 10px;
     margin-left: 10px;
 }
@@ -327,4 +337,53 @@ table>tbody>tr>td {
 .completed {
     color: #c5aeff;
     text-decoration: line-through;
+}
+
+.notCompleted {
+    color: #10277C;
+    text-decoration: none;
+}
+
+@media only screen and (max-width: 768px) {
+
+    .defaultLayout,
+    .content {
+        width: 100vw;
+    }
+
+    #defaultLayout main {
+        padding: 3%;
+    }
+
+    .sidebar {
+        min-height: 100vh !important;
+        display: none;
+        min-width: 0px;
+    }
+
+    .outlineButton {
+        display: none;
+    }
+
+    .profileIcon {
+        display: none;
+    }
+
+    .todoTitlehint {
+        font-size: 14px;
+    }
+
+    .todoInput {
+        margin-bottom: 1rem;
+    }
+
+    .todoBtn {
+        margin-bottom: 1rem;
+    }
+
+    .iconPadding {
+        margin-right: 0px;
+        margin-left: 0px;
+        display: none;
+    }
 }

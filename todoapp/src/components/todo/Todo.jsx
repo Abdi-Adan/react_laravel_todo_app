@@ -9,13 +9,14 @@ export default function Todo({ task, deleteTodo, editTodo, toggleComplete }) {
 
   return (
     <div className="Todo">
-      <p className={`${task['completed'] ? '' : "completed"}`} onClick={() => toggleComplete(task['id'])}>
-        <FontAwesomeIcon className='iconPadding' icon={faList} onClick={() => editTodo(task['id'])} />
+      <p id={`${task["id"]}`} className={`${(task['completed'] == 1) ? 'completed' : "notCompleted"}`} onClick={() => toggleComplete(task)}>
+        <FontAwesomeIcon className='iconPadding' icon={faList} />
         {task['title']}
       </p>
+
       <div>
-        <FontAwesomeIcon className='iconPadding' icon={faPenToSquare} onClick={() => editTodo(task['id'])} />
-        <FontAwesomeIcon className='iconPadding' icon={faTrash} onClick={() => deleteTodo(task['id'])} />
+        <FontAwesomeIcon className='actionIconPadding' icon={faPenToSquare} onClick={() => editTodo(task['id'])} />
+        <FontAwesomeIcon className='actionIconPadding' icon={faTrash} onClick={() => deleteTodo(task['id'])} />
       </div>
     </div>
   )

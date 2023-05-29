@@ -3,7 +3,6 @@ import axiosClient from "../../axios-client.js";
 import TodoForm from "./TodoForm";
 import EditTodoForm from "./EditTodoForm";
 import { useEffect } from "react";
-import { v4 as uuidv4 } from "uuid";
 import Todo from "./Todo";
 
 export default function TodoWrapper() {
@@ -16,11 +15,9 @@ export default function TodoWrapper() {
   const getTodos = () => {
     axiosClient.get('/todo')
       .then(({ data }) => {
-        console.log(data.data)
         setTodos([
           ...data,
         ]);
-        console.log(todos);
       })
   }
 
@@ -58,13 +55,22 @@ export default function TodoWrapper() {
       })
   }
 
-  const toggleComplete = (id) => {
-    axiosClient.put('/todo/' + id)
+  const toggleComplete = (task) => {
+    const payload = {
+      "item": {
+        id: task['id'],
+        title: task['title'],
+        completed: task['completed'],
+      }
+    }
+
+    axiosClient.put('/todo/' + task['id'], payload)
       .then(({ data }) => {
         console.log(data)
         getTodos();
       })
       .catch(err => {
+        debugger;
         const response = err.response;
         if (response && response.status === 422) {
           setErrors(response.data.errors)
@@ -80,20 +86,22 @@ export default function TodoWrapper() {
     );
   }
 
-  const editTask = (task, id) => {
+  const editTask = (value, id, completed) => {
     const newPayload = {
       "item": {
-        'title': task,
+        'id': id,
+        'title': value,
+        'completed': completed
       }
     }
 
-    axiosClient.put('/todo/' + id, newPayload)
+    axiosClient.put('/todo/edit/' + id, newPayload)
       .then(({ data }) => {
         console.log(data)
-        debugger;
         getTodos();
       })
       .catch(err => {
+        debugger;
         const response = err.response;
         if (response && response.status === 422) {
           setErrors(response.data.errors)
@@ -109,7 +117,7 @@ export default function TodoWrapper() {
 
       {todos.map((todo) =>
         todo.isEditing ? (
-          <EditTodoForm editTodo={editTask} task={todo} />
+          <EditTodoForm key={todo['id']} editTodo={editTask} task={todo} />
         ) : (
           <Todo
             key={todo['id']}
@@ -120,6 +128,9 @@ export default function TodoWrapper() {
           />
         )
       )}
+
+
+
     </div>
   );
 };

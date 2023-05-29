@@ -44,10 +44,29 @@ class ItemController extends Controller
     {
         $existingItem = Item::find($id);
         if( $existingItem ){
-            $existingItem->completed = $request->item['completed'] ? true: false;
-            $existingItem->completed_at = $request->item['completed'] ? Carbon::now(): null;
 
-            // $existingItem->title = $request->item['title'];
+            $existingItem->completed = $request->item['completed'] ? false: true;
+            $existingItem->completed_at = $request->item['completed'] ? null : Carbon::now();
+
+            $existingItem->save();
+
+            return $existingItem;
+        }
+
+        return "Item not found";
+    }
+
+    public function edit(Request $request, $id)
+    {
+        $existingItem = Item::find($id);
+        if( $existingItem ){
+            $newTitle = $request->item['title'];
+            $oldTitle = $existingItem->title;
+
+            if($newTitle != $oldTitle){
+                $existingItem->title = $newTitle;
+            }
+
 
             $existingItem->save();
 
