@@ -353,7 +353,7 @@ table>tbody>tr>td {
     cursor: pointer;
 }
 
-.Todo {
+.TodoTile {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -362,8 +362,12 @@ table>tbody>tr>td {
     padding: 0.75rem 1rem;
     border-radius: 5px;
     margin-bottom: 1rem;
-    cursor: pointer;
     width: 96%;
+}
+
+.Todo {
+    cursor: pointer;
+    width: 90%;
 }
 
 .iconPadding {
@@ -377,12 +381,12 @@ table>tbody>tr>td {
 }
 
 .completed {
-    color: #c5aeff;
+    color: #10277C;
     text-decoration: line-through;
 }
 
 .notCompleted {
-    color: #10277C;
+    color: #000;
     text-decoration: none;
 }
 
@@ -426,6 +430,10 @@ table>tbody>tr>td {
     .iconPadding {
         margin-right: 0px;
         margin-left: 0px;
+        display: none;
+    }
+
+    .createdAtColumn {
         display: none;
     }
 }
