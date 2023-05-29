@@ -4,12 +4,23 @@ import TodoForm from "./TodoForm";
 import EditTodoForm from "./EditTodoForm";
 import { useEffect } from "react";
 import Todo from "./Todo";
+import Toast from "./toast.jsx";
 
 export default function TodoWrapper() {
   const [todos, setTodos] = useState([]);
+  const [notification, _setNotification] = useState();
+
+  const setNotification = (message) => {
+    _setNotification(message);
+    setTimeout(() => {
+      _setNotification('')
+    }, 5000);
+  }
+
 
   useEffect(() => {
     getTodos();
+    setNotification('All todos fetched!');
   }, [])
 
   const getTodos = () => {
@@ -32,11 +43,13 @@ export default function TodoWrapper() {
       .then(({ data }) => {
         console.log(data)
         getTodos();
+        setNotification('New todo item added!');
       })
       .catch(err => {
         const response = err.response;
         if (response && response.status === 422) {
           setErrors(response.data.errors)
+          setNotification('Error adding new todo item');
         }
       })
   }
@@ -46,11 +59,13 @@ export default function TodoWrapper() {
       .then(({ data }) => {
         console.log(data)
         getTodos();
+        setNotification('New todo item deleted!');
       })
       .catch(err => {
         const response = err.response;
         if (response && response.status === 422) {
           setErrors(response.data.errors)
+          setNotification('Error deleting new todo item');
         }
       })
   }
@@ -68,12 +83,18 @@ export default function TodoWrapper() {
       .then(({ data }) => {
         console.log(data)
         getTodos();
+        if (data['completed']) {
+          setNotification('New todo item completed!');
+        } else {
+          setNotification('New todo item unchecked!');
+        }
       })
       .catch(err => {
         debugger;
         const response = err.response;
         if (response && response.status === 422) {
           setErrors(response.data.errors)
+          setNotification('Error completing new todo item');
         }
       })
   }
@@ -99,12 +120,14 @@ export default function TodoWrapper() {
       .then(({ data }) => {
         console.log(data)
         getTodos();
+        setNotification('New todo item edited!');
       })
       .catch(err => {
         debugger;
         const response = err.response;
         if (response && response.status === 422) {
           setErrors(response.data.errors)
+          setNotification('Error editting new todo item');
         }
       })
   };
@@ -114,6 +137,11 @@ export default function TodoWrapper() {
       <h1 className="todoTitlehint">Your Task Tracker. Stay Productive.</h1>
 
       <TodoForm addTodo={addTodo} />
+
+      {notification &&
+
+        <Toast body={notification} />
+      }
 
       {todos.map((todo) =>
         todo.isEditing ? (
@@ -128,8 +156,6 @@ export default function TodoWrapper() {
           />
         )
       )}
-
-
 
     </div>
   );
