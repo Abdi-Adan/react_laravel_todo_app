@@ -8,9 +8,9 @@ import { faUser } from '@fortawesome/free-solid-svg-icons'
 export default function DefaultLayout() {
     const { user, token, setUser, setToken } = useStateContext();
 
-    if (!token) {
-        return <Navigate to="/login" />;
-    }
+    // if (!token) {
+    //     return <Navigate to="/login" />;
+    // }
 
     const onLogout = ev => {
         ev.preventDefault()
