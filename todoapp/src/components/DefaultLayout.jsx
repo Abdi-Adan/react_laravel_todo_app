@@ -38,7 +38,7 @@ export default function DefaultLayout() {
             <div className="content">
                 <header>
                     <div className="headerTitle">
-                        Effortlessly Manage Your Tasks.
+                        Effortlessly Manage Your Tasks. (DEPLOYED)
                     </div>
 
 

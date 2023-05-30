@@ -41,7 +41,6 @@ export default function TodoWrapper() {
 
     axiosClient.post('/todo/add', payload)
       .then(({ data }) => {
-        console.log(data)
         getTodos();
         setNotification('New todo item added!');
       })
@@ -57,7 +56,6 @@ export default function TodoWrapper() {
   const deleteTodo = (id) => {
     axiosClient.delete('/todo/' + id)
       .then(({ data }) => {
-        console.log(data)
         getTodos();
         setNotification('New todo item deleted!');
       })
@@ -81,7 +79,6 @@ export default function TodoWrapper() {
 
     axiosClient.put('/todo/' + task['id'], payload)
       .then(({ data }) => {
-        console.log(data)
         getTodos();
         if (data['completed']) {
           setNotification('New todo item completed!');
@@ -118,7 +115,6 @@ export default function TodoWrapper() {
 
     axiosClient.put('/todo/edit/' + id, newPayload)
       .then(({ data }) => {
-        console.log(data)
         getTodos();
         setNotification('New todo item edited!');
       })

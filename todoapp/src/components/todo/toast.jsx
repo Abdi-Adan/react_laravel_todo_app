@@ -1,6 +1,5 @@
 export default function Toast({ body }) {
     var ifInfoError = body.includes('Error');
-    console.log(ifInfoError);
 
     return (
         <div className={`${ifInfoError ? 'errorToast' : "infoToast"}`} >
