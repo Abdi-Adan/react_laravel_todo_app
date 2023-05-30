@@ -10,6 +10,10 @@ import GuestLayout from "./components/GuestLayout";
 const router = createBrowserRouter([
     {
         path: '/',
+        element: <Navigate to="/todo" />
+    },
+    {
+        path: '/',
         element: <DefaultLayout />,
         children: [
             {
